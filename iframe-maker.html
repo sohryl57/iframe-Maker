@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سازنده ایفریم پیام‌رسان آرام</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a29bfe;
+        }
+        
+        body {
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            min-height: 100vh;
+        }
+        
+        /* تم‌های رنگی */
+        .theme-red {
+            --primary-color: #ff7675;
+            --secondary-color: #d63031;
+        }
+        
+        .theme-yellow {
+            --primary-color: #fdcb6e;
+            --secondary-color: #e17055;
+        }
+        
+        .theme-orange {
+            --primary-color: #ff9f43;
+            --secondary-color: #e84393;
+        }
+        
+        .theme-purple {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a29bfe;
+        }
+        
+        .theme-pink {
+            --primary-color: #fd79a8;
+            --secondary-color: #e84393;
+        }
+        
+        .theme-green {
+            --primary-color: #00b894;
+            --secondary-color: #55efc4;
+        }
+        
+        .theme-blue {
+            --primary-color: #0984e3;
+            --secondary-color: #74b9ff;
+        }
+        
+        .theme-black {
+            --primary-color: #2d3436;
+            --secondary-color: #636e72;
+        }
+        
+        .container-main {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            color: #2d3436;
+        }
+        
+        .theme-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .theme-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid white;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .theme-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .theme-btn.active {
+            transform: scale(1.1);
+            border-color: gold;
+            box-shadow: 0 0 10px gold;
+        }
+        
+        .tab-content {
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-top: none;
+            padding: 20px;
+            border-radius: 0 0 10px 10px;
+            min-height: 300px;
+        }
+        
+        .nav-tabs .nav-link {
+            color: #2d3436;
+            font-weight: bold;
+        }
+        
+        .nav-tabs .nav-link.active {
+            background-color: white;
+            border-color: #dee2e6 #dee2e6 white;
+            color: var(--primary-color);
+        }
+        
+        .iframe-preview {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+        
+        .code-container {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            direction: ltr;
+            text-align: left;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+        
+        .empty-state {
+            color: #6c757d;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .btn-custom {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-custom:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        .header-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+    </style>
+</head>
+<body class="theme-purple">
+    <div class="container">
+        <div class="header-title">
+            <div class="logo">🌈</div>
+            <h1>سازنده ایفریم پیام‌رسان آرام</h1>
+            <p class="lead">ابزار حرفه‌ای برای ساخت و شخصی‌سازی ایفریم‌ها</p>
+        </div>
+        
+        <div class="container-main">
+            <div class="theme-selector">
+                <div class="theme-btn theme-red active" data-theme="theme-red" style="background: linear-gradient(135deg, #ff7675, #d63031);"></div>
+                <div class="theme-btn theme-yellow" data-theme="theme-yellow" style="background: linear-gradient(135deg, #fdcb6e, #e17055);"></div>
+                <div class="theme-btn theme-orange" data-theme="theme-orange" style="background: linear-gradient(135deg, #ff9f43, #e84393);"></div>
+                <div class="theme-btn theme-purple" data-theme="theme-purple" style="background: linear-gradient(135deg, #6c5ce7, #a29bfe);"></div>
+                <div class="theme-btn theme-pink" data-theme="theme-pink" style="background: linear-gradient(135deg, #fd79a8, #e84393);"></div>
+                <div class="theme-btn theme-green" data-theme="theme-green" style="background: linear-gradient(135deg, #00b894, #55efc4);"></div>
+                <div class="theme-btn theme-blue" data-theme="theme-blue" style="background: linear-gradient(135deg, #0984e3, #74b9ff);"></div>
+                <div class="theme-btn theme-black" data-theme="theme-black" style="background: linear-gradient(135deg, #2d3436, #636e72);"></div>
+            </div>
+            
+            <div class="settings-panel">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">آدرس سایت:</span>
+                            <input type="text" id="siteUrl" class="form-control" placeholder="https://example.com">
+                            <button id="generateBtn" class="btn btn-custom">تولید کن</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">عرض:</span>
+                            <input type="text" id="iframeWidth" class="form-control" value="100%">
+                            <span class="input-group-text">ارتفاع:</span>
+                            <input type="text" id="iframeHeight" class="form-control" value="500px">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="allowFullscreen" checked>
+                            <label class="form-check-label" for="allowFullscreen">اجازه حالت تمام صفحه</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="allowScroll" checked>
+                            <label class="form-check-label" for="allowScroll">اجازه اسکرول</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="preview-tab" data-bs-toggle="tab" data-bs-target="#preview" type="button" role="tab">پیش‌نمایش</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="code-tab" data-bs-toggle="tab" data-bs-target="#code" type="button" role="tab">کد iframe</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="embed-tab" data-bs-toggle="tab" data-bs-target="#embed" type="button" role="tab">اطلاعات پیوند</button>
+                </li>
+            </ul>
+            
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="preview" role="tabpanel">
+                    <div id="iframePreviewContainer">
+                        <div class="empty-state">
+                            <i class="bi bi-layout-text-sidebar-reverse" style="font-size: 3rem;"></i>
+                            <p class="mt-3">پس از وارد کردن آدرس سایت، پیش‌نمایش در اینجا نمایش داده می‌شود</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="code" role="tabpanel">
+                    <div class="code-container">
+                        <pre id="iframeCode"><code>&lt;!-- کد iframe پس از تولید در اینجا نمایش داده می‌شود --&gt;</code></pre>
+                    </div>
+                    <button id="copyCodeBtn" class="btn btn-custom mt-3" disabled>
+                        <i class="bi bi-clipboard"></i> کپی کردن کد
+                    </button>
+                </div>
+                
+                <div class="tab-pane fade" id="embed" role="tabpanel">
+                    <div id="embedInfo" class="embed-info">
+                        <div class="empty-state">
+                            <i class="bi bi-info-circle" style="font-size: 3rem;"></i>
+                            <p class="mt-3">اطلاعات پیوند پس از تولید کد در اینجا نمایش داده می‌شود</p>
+                        </div>
+                    </div>
+                    <button id="copyEmbedBtn" class="btn btn-custom mt-3" disabled>
+                        <i class="bi bi-clipboard"></i> کپی اطلاعات پیوند
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const siteUrlInput = document.getElementById('siteUrl');
+            const generateBtn = document.getElementById('generateBtn');
+            const iframePreviewContainer = document.getElementById('iframePreviewContainer');
+            const iframeCode = document.getElementById('iframeCode');
+            const copyCodeBtn = document.getElementById('copyCodeBtn');
+            const copyEmbedBtn = document.getElementById('copyEmbedBtn');
+            const iframeWidth = document.getElementById('iframeWidth');
+            const iframeHeight = document.getElementById('iframeHeight');
+            const allowFullscreen = document.getElementById('allowFullscreen');
+            const allowScroll = document.getElementById('allowScroll');
+            const embedInfo = document.getElementById('embedInfo');
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            
+            // تغییر تم
+            themeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    themeButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    document.body.className = this.dataset.theme;
+                    
+                    // تغییر رنگ دکمه‌ها
+                    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color');
+                    const secondaryColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-color');
+                    
+                    document.querySelectorAll('.btn-custom').forEach(btn => {
+                        btn.style.backgroundColor = primaryColor;
+                        btn.style.borderColor = primaryColor;
+                    });
+                });
+            });
+            
+            // تابع تولید کد iframe
+            function generateIframe() {
+                let url = siteUrlInput.value.trim();
+                
+                if (!url) {
+                    alert('لطفاً آدرس سایت را وارد کنید');
+                    return;
+                }
+                
+                // افزودن http:// اگر وجود نداشته باشد
+                if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                    url = 'https://' + url;
+                }
+                
+                // دریافت تنظیمات
+                const width = iframeWidth.value || '100%';
+                const height = iframeHeight.value || '500px';
+                const fullscreenAttr = allowFullscreen.checked ? ' allowfullscreen' : '';
+                const scrollingAttr = allowScroll.checked ? 'yes' : 'no';
+                
+                // تولید کد iframe
+                const iframeHtml = `&lt;iframe src="${url}" width="${width}" height="${height}" frameborder="0" scrolling="${scrollingAttr}"${fullscreenAttr}&gt;&lt;/iframe&gt;`;
+                
+                // نمایش پیش‌نمایش
+                iframePreviewContainer.innerHTML = '';
+                const previewFrame = document.createElement('iframe');
+                previewFrame.src = url;
+                previewFrame.className = 'iframe-preview';
+                previewFrame.style.width = width;
+                previewFrame.style.height = height;
+                if (allowFullscreen.checked) {
+                    previewFrame.setAttribute('allowfullscreen', '');
+                }
+                previewFrame.setAttribute('scrolling', scrollingAttr);
+                iframePreviewContainer.appendChild(previewFrame);
+                
+                // نمایش کد
+                iframeCode.innerHTML = iframeHtml;
+                
+                // نمایش اطلاعات پیوند
+                const currentDate = new Date().toLocaleDateString('fa-IR');
+                embedInfo.innerHTML = `
+                    <h4>اطلاعات پیوند:</h4>
+                    <p><strong>آدرس منبع:</strong> ${url}</p>
+                    <p><strong>ابعاد:</strong> عرض: ${width}, ارتفاع: ${height}</p>
+                    <p><strong>ویژگی‌ها:</strong> 
+                        ${allowFullscreen.checked ? 'حالت تمام صفحه فعال' : 'حالت تمام صفحه غیرفعال'}, 
+                        ${allowScroll.checked ? 'اسکرول فعال' : 'اسکرول غیرفعال'}
+                    </p>
+                    <p><strong>تاریخ ایجاد:</strong> ${currentDate}</p>
+                    <div class="alert alert-info mt-3">
+                        <strong>نکته:</strong> برخی وبسایت‌ها ممکن است با استفاده از هدر X-Frame-Options از نمایش در iframe جلوگیری کنند.
+                    </div>
+                `;
+                
+                // فعال کردن دکمه‌های کپی
+                copyCodeBtn.disabled = false;
+                copyEmbedBtn.disabled = false;
+            }
+            
+            // رویداد کلیک دکمه تولید
+            generateBtn.addEventListener('click', generateIframe);
+            
+            // رویداد کلیک دکمه کپی کد
+            copyCodeBtn.addEventListener('click', function() {
+                const code = iframeCode.textContent;
+                copyToClipboard(code, copyCodeBtn);
+            });
+            
+            // رویداد کلیک دکمه کپی اطلاعات پیوند
+            copyEmbedBtn.addEventListener('click', function() {
+                const embedText = embedInfo.innerText;
+                copyToClipboard(embedText, copyEmbedBtn);
+            });
+            
+            // تابع عمومی برای کپی به کلیپ‌بورد
+            function copyToClipboard(text, button) {
+                navigator.clipboard.writeText(text).then(function() {
+                    const originalText = button.innerHTML;
+                    button.innerHTML = '<i class="bi bi-check"></i> کپی شد!';
+                    setTimeout(function() {
+                        button.innerHTML = originalText;
+                    }, 2000);
+                }).catch(function(err) {
+                    alert('خطا در کپی کردن: ' + err);
+                });
+            }
+            
+            // امکان تولید با کلید Enter
+            siteUrlInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    generateBtn.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
